@@ -17,17 +17,17 @@ jobs:
     # Specify the operating system for this job
     runs-on: ubuntu-latest
     env:
-      SLACK_WEBHOOK_URL: ${{secrets.SLACK_WEBHOOK_URL}}
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
     # Define the steps to execute in this job
     steps:
       # Step to checkout the source code from the repository
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       # Step to set up the Node.js version
       - name: Install node js v20
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: "20"
 
@@ -39,7 +39,7 @@ jobs:
       - name: Install Chrome browser for Playwright
         run: npx playwright install chrome
 
-      # Step to run tests with qa as environment variable similarly we can define qa|dev|qaApi|devApi
+      # Step to run tests with qa as environment variable
       - name: Run tests
         run: npm run test:serial
         env:
@@ -71,7 +71,7 @@ jobs:
 
       # Step to upload artifact
       - name: Upload artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: html-report
           path: html-report.zip
@@ -81,15 +81,15 @@ jobs:
       # Step to generate artifact link
       - name: Generate artifact link
         id: artifact_link
-        run: echo "::set-output name=artifact_url::https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+        run: echo "artifact_url=https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" >> $GITHUB_ENV
         if: always()
 
-      # Send Slack notification with html-reprt url once the tests are completed
+      # Send Slack notification with html-report URL once the tests are completed
       - name: Send Slack notification
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_CHANNEL: "#playwright-test-reports"
           SLACK_USERNAME: Playwright GitHub Actions
-          SLACK_MESSAGE: "Test results are available in [Artifacts section](${{ steps.artifact_link.outputs.artifact_url }}) as html-report."
+          SLACK_MESSAGE: "Test results are available in [Artifacts section](${{ env.artifact_url }}) as html-report."
         if: always()
