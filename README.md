@@ -321,3 +321,11 @@ npm run lighthouse
 [detailed-report-screenshot]: ReadMeImages/DetailedReport.PNG
 [failure-report-screenshot]: ReadMeImages/FailureReport.PNG
 [sonar-report-screenshot]: ReadMeImages/SonarReport.PNG
+
+### SUNIL's
+
+To run a script 
+
+```shell
+$env:ENV="prod"; npx playwright test tests/functional/BDI3_Login.test.ts --workers=1 --project=Chrome --headed
+```

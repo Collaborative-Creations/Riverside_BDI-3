@@ -1,6 +1,6 @@
 import { Page, BrowserContext, Locator, expect } from '@playwright/test';
 import { WebActions } from "@lib/WebActions";
-import { testConfig } from '../../testConfig';
+import { testConfig } from '../../../testConfig';
 
 let webActions: WebActions;
 
