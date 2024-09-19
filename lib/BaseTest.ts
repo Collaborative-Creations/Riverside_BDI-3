@@ -1,11 +1,14 @@
 import { TestInfo, test as baseTest } from '@playwright/test';
-import { LoginPage } from '@pages/LoginPage';
-import { ElementsPage } from '@pages/ElementsPage';
-import { AlertsFrameWindowsPage } from '@pages/AlertsFrameWindowsPage';
-import { WidgetsPage } from '@pages/WidgetsPage';
-import { InteractionsPage } from '@pages/InteractionsPage';
+import { LoginPage } from '../src/BDI3_PageFactory/pageRepository/LoginPage';
+import { ElementsPage } from '../src/BDI3_PageFactory/pageRepository/ElementsPage';
+import { AlertsFrameWindowsPage } from '../src/BDI3_PageFactory/pageRepository/AlertsFrameWindowsPage';
+import { WidgetsPage } from '../src/BDI3_PageFactory/pageRepository/WidgetsPage';
+import { InteractionsPage } from '../src/BDI3_PageFactory/pageRepository/InteractionsPage';
 import { WebActions } from '@lib/WebActions';
 import AxeBuilder from '@axe-core/playwright';
+
+import { BDI3_LoginPage } from 'src/BDI3_PageFactory/pageRepository/BDI3_LoginPage';
+import { BDI3_DashBoardPage } from 'src/BDI3_PageFactory/pageRepository/BDI3_DashboardPage';
 
 const test = baseTest.extend<{
     webActions: WebActions;
@@ -16,6 +19,9 @@ const test = baseTest.extend<{
     interactionsPage: InteractionsPage;
     makeAxeBuilder: AxeBuilder;
     testInfo: TestInfo;
+
+    bdi3LoginPage: BDI3_LoginPage;
+    bdi3DashBoardPAge: BDI3_DashBoardPage
 }>({
     webActions: async ({ page, context }, use) => {
         await use(new WebActions(page, context));
@@ -39,7 +45,16 @@ const test = baseTest.extend<{
         await use(new AxeBuilder({ page })
             .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
             .exclude('#commonly-reused-element-with-known-issue'));
-    }
+    },
+
+    bdi3LoginPage: async ({ page, context }, use) => {
+        await use(new BDI3_LoginPage(page, context));
+    },
+    bdi3DashBoardPAge: async ({ page, context }, use) => {
+        await use(new BDI3_DashBoardPage(page, context));
+    },
+
+
 })
 
 export default test;

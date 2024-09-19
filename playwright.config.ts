@@ -2,10 +2,10 @@ import { PlaywrightTestConfig, devices } from '@playwright/test';
 import { testConfig } from './testConfig';
 import { OrtoniReportConfig } from 'ortoni-report';
 
-const ENV = process.env.npm_config_ENV;
+const ENV = process.env.ENV;
 
-if (!ENV || ![`qa`, `dev`, `qaApi`, `devApi`].includes(ENV)) {
-  console.log(`Please provide a correct environment value after command like "--ENV=qa|dev|qaApi|devApi"`);
+if (!ENV || ![`qa`, `prod`, `dev`, `qaApi`, `devApi`].includes(ENV)) {
+  console.log(`Please provide a correct environment value after command like "--ENV=qa|prod|dev|qaApi|devApi"`);
   process.exit();
 }
 
@@ -17,6 +17,7 @@ const reportConfig: OrtoniReportConfig = {
   authorName: "Akshay Pai",
   preferredTheme: "dark",
   projectName: "Playwright Framework with Typescript",
+  
 }
 
 const config: PlaywrightTestConfig = {
