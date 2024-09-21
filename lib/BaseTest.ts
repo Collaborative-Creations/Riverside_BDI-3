@@ -9,6 +9,7 @@ import AxeBuilder from '@axe-core/playwright';
 
 import { BDI3_LoginPage } from 'src/BDI3_PageFactory/pageRepository/BDI3_LoginPage';
 import { BDI3_DashBoardPage } from 'src/BDI3_PageFactory/pageRepository/BDI3_DashboardPage';
+import { BDI3_ChildPage } from 'src/BDI3_PageFactory/pageRepository/BDI3_ChildPage';
 
 const test = baseTest.extend<{
     webActions: WebActions;
@@ -21,7 +22,8 @@ const test = baseTest.extend<{
     testInfo: TestInfo;
 
     bdi3LoginPage: BDI3_LoginPage;
-    bdi3DashBoardPAge: BDI3_DashBoardPage
+    bdi3DashBoardPAge: BDI3_DashBoardPage;
+    bdi3ChildPage: BDI3_ChildPage;
 }>({
     webActions: async ({ page, context }, use) => {
         await use(new WebActions(page, context));
@@ -47,11 +49,15 @@ const test = baseTest.extend<{
             .exclude('#commonly-reused-element-with-known-issue'));
     },
 
+
     bdi3LoginPage: async ({ page, context }, use) => {
         await use(new BDI3_LoginPage(page, context));
     },
     bdi3DashBoardPAge: async ({ page, context }, use) => {
         await use(new BDI3_DashBoardPage(page, context));
+    },
+    bdi3ChildPage: async ({ page, context }, use) => {
+        await use(new BDI3_ChildPage(page, context));
     },
 
 

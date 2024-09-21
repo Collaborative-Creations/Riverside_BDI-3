@@ -21,7 +21,6 @@ const reportConfig: OrtoniReportConfig = {
 }
 
 const config: PlaywrightTestConfig = {
-
   //Global Setup to run before all tests
   globalSetup: `./global-setup`,
 
@@ -32,7 +31,12 @@ const config: PlaywrightTestConfig = {
   retries: 0,
 
   //Reporters
-  reporter: [[`./CustomReporterConfig.ts`], [`allure-playwright`], [`html`, { outputFolder: 'html-report', open: 'never' }],['ortoni-report', reportConfig]],
+  reporter: [
+    [`./CustomReporterConfig.ts`],
+    // [`allure-playwright`],
+    [`html`, { outputFolder: "html-report", open: "always" }],
+    // ["ortoni-report", reportConfig],
+  ],
 
   projects: [
     {
@@ -60,12 +64,12 @@ const config: PlaywrightTestConfig = {
         //Artifacts
         screenshot: `only-on-failure`,
         video: `retain-on-failure`,
-        trace: `retain-on-failure`,
+        trace: `on`,
 
         //Slows down execution by ms
         launchOptions: {
-          slowMo: 0
-        }
+          slowMo: 0,
+        },
       },
     },
     {
@@ -81,8 +85,8 @@ const config: PlaywrightTestConfig = {
         video: `retain-on-failure`,
         trace: `retain-on-failure`,
         launchOptions: {
-          slowMo: 0
-        }
+          slowMo: 0,
+        },
       },
     },
 
@@ -99,8 +103,8 @@ const config: PlaywrightTestConfig = {
         video: `retain-on-failure`,
         trace: `retain-on-failure`,
         launchOptions: {
-          slowMo: 0
-        }
+          slowMo: 0,
+        },
       },
     },
 
@@ -118,8 +122,8 @@ const config: PlaywrightTestConfig = {
         video: `retain-on-failure`,
         trace: `retain-on-failure`,
         launchOptions: {
-          slowMo: 0
-        }
+          slowMo: 0,
+        },
       },
     },
     {
@@ -135,8 +139,8 @@ const config: PlaywrightTestConfig = {
         video: `retain-on-failure`,
         trace: `retain-on-failure`,
         launchOptions: {
-          slowMo: 0
-        }
+          slowMo: 0,
+        },
       },
     },
     {
@@ -153,19 +157,19 @@ const config: PlaywrightTestConfig = {
         video: `retain-on-failure`,
         trace: `retain-on-failure`,
         launchOptions: {
-          slowMo: 0
-        }
+          slowMo: 0,
+        },
       },
     },
     {
-      name: `DB`
+      name: `DB`,
     },
     {
       name: `API`,
       use: {
-        baseURL: testConfig[ENV]
-      }
-    }
+        baseURL: testConfig[ENV],
+      },
+    },
   ],
 };
 export default config;

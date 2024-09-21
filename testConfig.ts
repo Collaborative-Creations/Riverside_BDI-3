@@ -1,5 +1,5 @@
 export const testConfig = {
-    qa: `https://demoqa.com`,
+    qa: `https://clinical-wjv-qa.rsiapps.com/`,
     prod: `https://riversidescore.com/`,
     dev: ``,
     qaApi: `https://reqres.in`,

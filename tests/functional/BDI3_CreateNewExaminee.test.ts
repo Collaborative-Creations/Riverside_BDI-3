@@ -2,7 +2,7 @@ import test from '@lib/BaseTest';
 
 // We can use Steps like in Cucmber format as shown below
 
-test(`Verify BDI3 Login`, { tag: '@Smoke'}, async ({ bdi3LoginPage, bdi3DashBoardPAge }) => {
+test(`Verify BDI3 Login`, { tag: ['@BDI3', '@creaneExaminee']}, async ({ bdi3LoginPage, bdi3DashBoardPAge, bdi3ChildPage }) => {
     await test.step(`Navigate to Prod Url`, async () => {
         await bdi3LoginPage.navigateToURL();
     });
@@ -11,6 +11,7 @@ test(`Verify BDI3 Login`, { tag: '@Smoke'}, async ({ bdi3LoginPage, bdi3DashBoar
     });
     await test.step(`Create a new child`, async () => {
         await bdi3DashBoardPAge.navigateToAddChildPage();
+        await bdi3ChildPage.createNewExaminee();
     });
     // await test.step(`Login to Book Store application`, async () => {
     //     await loginPage.loginToApplication();
