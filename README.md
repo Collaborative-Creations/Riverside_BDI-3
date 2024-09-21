@@ -329,4 +329,3 @@ To run a script
 ```shell
 $env:ENV="prod"; npx playwright test tests/functional/BDI3_Login.test.ts --workers=1 --project=Chrome --headed
 ```
-  
