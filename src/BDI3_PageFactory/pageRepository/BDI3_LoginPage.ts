@@ -54,8 +54,8 @@ export class BDI3_LoginPage {
     }
 
     async loginToBDI3(){
-        await this.USERNAME_INPUTBOX.fill("Bharathi(primary)one");
-        await this.PASSWORD_INPUTBOX.fill("Adep@123");
+        await this.USERNAME_INPUTBOX.fill("Bharathi.product9399");
+        await this.PASSWORD_INPUTBOX.fill("Adep@1234");
         await this.SIGNIN_BUTTON.click();
         await this.BDI3_TILE.click();
         await this.BDI3_WELCOME_TEXT.waitFor({state:"visible", timeout:60000});
