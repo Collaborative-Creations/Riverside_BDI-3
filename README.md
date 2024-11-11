@@ -327,5 +327,13 @@ npm run lighthouse
 To run a script 
 
 ```shell
-$env:ENV="prod"; npx playwright test tests/functional/BDI3_Login.test.ts --workers=1 --project=Chrome --headed
+$env:ENV="prod"; npx playwright test tests/functional/BDI3_CreateNewExaminee.test.ts --workers=1 --project=Chrome --headed
+```
+
+# Update the libraries 
+
+>  what command to use if u r collegue has installed new npm libraries 
+
+``` powershell 
+npm install
 ```
