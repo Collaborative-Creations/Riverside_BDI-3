@@ -35,11 +35,30 @@ export class BDI3_DashBoardPage {
 
     }
 
-    async navigateToAddChildPage(){
-        await this.CHILD_ADMINISTRATION_MENU_DROPDOWN.click();
+    async navigateToAddChildPage() {
+        const maxAttempts = 5; // Define the maximum number of attempts
+        let attempts = 0;
+        let isChildMenuVisible = false;
+    
+        do {
+            // Attempt to click the dropdown
+            await this.CHILD_ADMINISTRATION_MENU_DROPDOWN.click();
+            attempts++;
+    
+            // Wait for a short period to allow the dropdown to potentially open
+            await this.page.waitForTimeout(500);
+    
+            // Check if the ADD_CHILD_MENU_DROPDOWN_OPTION is visible
+            isChildMenuVisible = await this.ADD_CHILD_MENU_DROPDOWN_OPTION.isVisible();
+        } while (!isChildMenuVisible && attempts < maxAttempts);
+    
+        if (!isChildMenuVisible) {
+            throw new Error("Failed to open CHILD_ADMINISTRATION_MENU_DROPDOWN after multiple attempts");
+        }
+    
+        // Now click on the child menu option
         await this.ADD_CHILD_MENU_DROPDOWN_OPTION.click();
-        await this.CONTENT_LOADING_ICON.waitFor({state: "hidden", timeout:60000});
-        await this.page.pause();
-    } 
-
+        await this.CONTENT_LOADING_ICON.waitFor({ state: 'hidden', timeout: 60000 });
+    }
+    
 }

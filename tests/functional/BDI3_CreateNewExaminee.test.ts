@@ -8,6 +8,7 @@ test(`Verify BDI3 Login`, { tag: ['@BDI3', '@creaneExaminee']}, async ({ bdi3Log
     });
     await test.step(`Login to BDI3 product`, async () => {
         await bdi3LoginPage.loginToBDI3();
+    
     });
     await test.step(`Create a new child`, async () => {
         await bdi3DashBoardPAge.navigateToAddChildPage();
