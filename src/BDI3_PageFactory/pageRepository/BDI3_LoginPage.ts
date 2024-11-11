@@ -1,5 +1,6 @@
 import { expect, Locator, Page, BrowserContext } from '@playwright/test';
 import path from 'path';
+import { testConfig } from 'testConfig';
 
 export class BDI3_LoginPage {
     private readonly page: Page;
@@ -54,8 +55,8 @@ export class BDI3_LoginPage {
     }
 
     async loginToBDI3(){
-        await this.USERNAME_INPUTBOX.fill("Bharathi.product9399");
-        await this.PASSWORD_INPUTBOX.fill("Adep@1234");
+        await this.USERNAME_INPUTBOX.fill(testConfig.username);
+        await this.PASSWORD_INPUTBOX.fill(testConfig.password);
         await this.SIGNIN_BUTTON.click();
         await this.BDI3_TILE.click();
         await this.BDI3_WELCOME_TEXT.waitFor({state:"visible", timeout:60000});
